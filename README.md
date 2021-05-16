@@ -25,6 +25,6 @@
 **Now, you can run application (OBS: you need start the server first or you get error)**
 
 - java Server *[port]*
-- java Client *[Server ip]* *[Server port]* *[What to do (Listar (List))]*
-- java Client *[Server ip]* *[Server port]* *[What to do (Votar (vote))]* *[candidate number]*
-- java Organizer *[Server ip]* *[Server port]* *[What to do (Parcial (get vote counting))]*
+- java Client *[Server ip]* *[Server port]* *[Listar(List)]*
+- java Client *[Server ip]* *[Server port]* *[Votar(vote)]* *[candidate number]*
+- java Organizer *[Server ip]* *[Server port]* *[Parcial(vote counting)]*
