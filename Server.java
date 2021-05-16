@@ -5,9 +5,7 @@ import java.io.*;
 
 public class Server {
     public static void main(String[] args) {
-        final String candidates = "N° da candidata     Nome da Candidata\n[69]                Tiny Texie\n[345]               Bridget Powers\n[1725]              Mini garanhão\n" +
-         "[8625]              Mini Mya\n[43125]             Tanya Tehanna\n";
-        final int[] parcial = {0, 0, 0, 0, 0};
+        final byte[] parcial = {0, 0, 0, 0, 0};
         try {
             String pattern = "dd/MM/yyyy HH:mm:ss";
             DateFormat dateFormat = new SimpleDateFormat(pattern);
@@ -27,41 +25,39 @@ public class Server {
                     String inputClient = input.readUTF();
                     switch (inputClient) {
                         case "Listar":
-                            output.writeUTF(candidates);
+                            output.writeByte(1);
                             break;
                         case "Parcial":
-                            output.writeUTF("N° da candidata     Nome da Candidata     N° de Votos\n[69]                Tiny Texie            " + parcial[0] +
-                            "\n[345]               Bridget Powers        " + parcial[1] + "\n[1725]              Mini garanhão         " + parcial[2] + "\n" +
-                           "[8625]              Mini Mya              " + parcial[3] +"\n[43125]             Tanya Tehanna         " + parcial[4] + "\n");
+                            output.write(parcial);
                             break;
                         case "Votar":
                             switch (input.readUTF()) {
                                 case "69":
                                     ++parcial[0];
-                                    output.writeUTF("Voto computado para a candidata Tiny Texie");
+                                    output.writeByte(3);
                                     break;
                                 case "345":
                                     ++parcial[1];
-                                    output.writeUTF("Voto computado para a candidata Bridget Powers");
+                                    output.writeByte(4);
                                     break;
                                 case "1725":
                                     ++parcial[2];
-                                    output.writeUTF("Voto computado para a candidata Mini garanhão");
+                                    output.writeByte(5);
                                     break;
                                 case "8625":
                                     ++parcial[3];
-                                    output.writeUTF("Voto computado para a candidata Mini Mya");
+                                    output.writeByte(6);
                                     break;
                                 case "43125":
                                     ++parcial[4];
-                                    output.writeUTF("Voto computado para a candidata Tanya Tehanna");
+                                    output.writeByte(7);
                                     break;
                                 default: 
-                                    output.writeUTF("Voto em candidata inexistente");
+                                    output.writeByte(8);
                             }
                             break;
                         default:
-                            output.writeUTF("Comando não encontrado");
+                            output.writeByte(9);
                     }
                     System.out.println("Conexão encerrada com: " + client.getInetAddress().getHostAddress());
                     input.close();

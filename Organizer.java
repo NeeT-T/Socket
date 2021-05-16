@@ -14,10 +14,13 @@ public class Organizer {
                 DataInputStream input = new DataInputStream(client.getInputStream());
                 if (clientInput.equalsIgnoreCase("Parcial")) {
                     output.writeUTF("Parcial");
-                    System.out.println(input.readUTF());
+                    byte[] parcial = input.readAllBytes();
+                    System.out.println("N° da candidata     Nome da Candidata     N° de Votos\n[69]                Tiny Texie            " + parcial[0] +
+                    "\n[345]               Bridget Powers        " + parcial[1] + "\n[1725]              Mini garanhão         " + parcial[2] + "\n" +
+                "[8625]              Mini Mya              " + parcial[3] +"\n[43125]             Tanya Tehanna         " + parcial[4] + "\n");
                 } else {
                     output.writeUTF("None");
-                    System.out.println(input.readUTF());
+                    System.out.println(getOutputToOrganizer(input.readByte()));
                 }
                 client.close();
             } else {
@@ -29,5 +32,13 @@ public class Organizer {
         } catch(IOException e) {
             System.out.println("Erro: " + e.getMessage());
         }
+    }
+
+    private static String getOutputToOrganizer(byte indexToResponse) {
+        switch (indexToResponse) {
+            case 9:
+                return "Comando não encontrado";
+        }
+        return null;
     }
 }

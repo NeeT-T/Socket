@@ -16,20 +16,20 @@ public class Client {
                 if (clientInput.equalsIgnoreCase("Listar")) {
                     System.out.println("# Votação da melhor atriz p* anã");
                     output.writeUTF("Listar");
-                    System.out.println(input.readUTF());
+                    System.out.println(getOutputToClient(input.readByte()));
                 } else if (clientInput.equalsIgnoreCase("Votar")) {
                     output.writeUTF("Votar");
                     if (voto != null) {
-                        output.writeUTF(voto);
                         System.out.println("# Votação para melhor atriz p* anã");
-                        System.out.println(input.readUTF());
+                        output.writeUTF(voto);
+                        System.out.println(getOutputToClient(input.readByte()));
                     } else {
                         output.writeUTF("non");
-                        System.out.println(input.readUTF());
+                        System.out.println(getOutputToClient(input.readByte()));
                     }
                 } else {
                     output.writeUTF("None");
-                    System.out.println(input.readUTF());
+                    System.out.println(getOutputToClient(input.readByte()));
                 }
                 client.close();
             } else {
@@ -41,5 +41,28 @@ public class Client {
         } catch(IOException e) {
             System.out.println("Erro: " + e.getMessage());
         }
+    }
+
+    private static String getOutputToClient(byte indexToResponse) {
+        switch (indexToResponse) {
+            case 1:
+                return "N° da candidata     Nome da Candidata\n[69]                Tiny Texie\n[345]               Bridget Powers\n[1725]              Mini garanhão\n" +
+                "[8625]              Mini Mya\n[43125]             Tanya Tehanna\n";
+            case 3:
+                return "Voto computado para a candidata Tiny Texie";
+            case 4:
+                return "Voto computado para a candidata Bridget Powers";
+            case 5:
+                return "Voto computado para a candidata Mini garanhão";
+            case 6:
+                return "Voto computado para a candidata Mini Mya";
+            case 7:
+                return "Voto computado para a candidata Tanya Tehanna";
+            case 8:
+                return "Voto em candidata inexistente";
+            case 9:
+                return "Comando não encontrado";
+        }
+        return null;
     }
 }
